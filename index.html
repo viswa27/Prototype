@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Create 2 objects - parent and child. Attach methods to parent and use those methods in child object using parents prototype</h3>
+    <pre>
+        function Parent() {}
+        Parent.prototype.parentMethod = function() {
+            console.log("This is a method from the parent object.");
+        };
+        function Child() {}
+        Child.prototype = Object.create(Parent.prototype);
+        var childObj = new Child();
+        childObj.parentMethod();
+    </pre><hr>
+    <h3>Write code to explain prototype chaining</h3>
+    <pre>
+      function Parent() {
+        this.parentProperty = "Parent Property";
+      }
+      
+      Parent.prototype.parentMethod = function() {
+        console.log("This is a method from the parent object.");
+      };
+      
+      function Child() {
+        this.childProperty = "Child Property";
+      }
+      
+      Child.prototype = Object.create(Parent.prototype);
+      
+      Child.prototype.childMethod = function() {
+        console.log("This is a method from the child object.");
+      };
+      
+      var childObj = new Child();
+      
+      console.log(childObj.childProperty);
+      console.log(childObj.parentProperty);
+      
+      childObj.childMethod();
+      childObj.parentMethod();
+    </pre><hr>
+    <h3>Add a method to calculate sum of all elements in Array in array's protype, use that method to calculate sum for multiple arrays</h3>
+    <pre>
+      Array.prototype.sum = function() {
+        return this.reduce(function(total, current) {
+          return total + current;
+        }, 0);
+      };
+      
+      var arr1 = [1, 2, 3, 4, 5];
+      var arr2 = [10, 20, 30, 40, 50];
+      var arr3 = [100, 200, 300, 400, 500];
+      
+      console.log(arr1.sum());
+      console.log(arr2.sum());
+      console.log(arr3.sum());
+    </pre><hr>
+    <h3>Write a JavaScript function to retrieve all the names of object's own and inherited properties.</h3>
+    <pre>
+      function getAllPropertyNames(obj) {
+        var propertyNames = [];
+
+        while (obj) {
+          propertyNames = propertyNames.concat(Object.getOwnPropertyNames(obj));
+          obj = Object.getPrototypeOf(obj);
+        }
+        
+        return propertyNames;
+      }
+
+      var obj = { a: 1, b: 2 };
+      var inheritedObj = Object.create(obj);
+      inheritedObj.c = 3;
+      
+      var allPropertyNames = getAllPropertyNames(inheritedObj);
+      console.log(allPropertyNames);
+    </pre>
+</body>
+</html>
